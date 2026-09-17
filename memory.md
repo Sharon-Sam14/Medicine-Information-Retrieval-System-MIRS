@@ -15,13 +15,17 @@
 > - **Sharon (Core IR Architect)**: **PHASE 2 IS 100% COMPLETE & VERIFIED ✅**
 >   - All 4 core IR deliverables implemented: Inverted Index, Boolean AST Parser, TF-IDF Vector Space Model, and 5-Factor Clinical Primacy Ranker.
 >   - `test_ir_engine.py` passes all 36 unit tests with 0 failures and sub-10ms response times.
-> - **Nysa, Ronald, and Sam**: Phases 1, 3, 4, and 5 are **PENDING / MISSING** as tracked below.
+> - **Ronald (Advanced IR Specialist)**: **PHASE 3 IS 100% COMPLETE & VERIFIED ✅**
+>   - Developed `nlp_advanced/query_expansion.py` and `nlp_advanced/thesaurus.json`.
+>   - Seamlessly converts layperson symptom inputs into parenthesized Boolean OR clauses containing pre-stemmed clinical synonyms prior to Sharon's retrieval engine.
+>   - Validated end-to-end via interactive CLI runner `demo_ronald.py`.
+> - **Nysa and Sam**: Phases 1, 4, and 5 are **PENDING / MISSING** as tracked below.
 
 | Team Member | Assigned Role | Assigned Phase & Focus | Implementation Status | Missing / Required Work to Complete |
 |---|---|---|---|---|
 | **Nysa** | Data Engineer | **Phase 1**: Data Acquisition & Preprocessing, Pattern Matching | 🟡 In Progress / Missing | 1. Implement automated Kaggle dataset download and verification script (`data_pipeline/ingest.py`).<br>2. Develop Python Regex module (`nlp_advanced/pattern_matcher.py`) for dosage extraction (e.g. `500mg`, `10ml`, `tablets`).<br>3. Implement generic drug name fuzzy string matching for spell-check.<br>4. Ensure preprocessing pipeline matches tokens in `cleaned_medicines (4).csv`. |
 | **Sharon** *(User)* | Core IR Architect | **Phase 2**: Core Retrieval Engine Construction | 🟢 **COMPLETED & TESTED (100%)** | **Completed Deliverables:**<br>• `ir_engine/preprocessor.py`<br>• `ir_engine/inverted_index.py`<br>• `ir_engine/boolean_model.py`<br>• `ir_engine/vector_model.py`<br>• `ir_engine/ranking.py`<br>• `ir_engine/search_engine.py`<br>• `test_ir_engine.py` (36/36 tests passing) |
-| **Ronald** | Advanced IR Specialist | **Phase 3**: Advanced Query Processing, Index Structuring | 🔴 **MISSING / PENDING** | 1. Medical thesaurus construction (`nlp_advanced/thesaurus.json`) mapping colloquial symptoms (`fever`, `headache`) to clinical terms (`pyrexia`, `migraine`).<br>2. Query expansion middleware (`nlp_advanced/query_expansion.py`) injecting weighted synonyms prior to Sharon's retrieval.<br>3. Symptom-to-document ID index mapping fine-tuning. |
+| **Ronald** | Advanced IR Specialist | **Phase 3**: Advanced Query Processing, Index Structuring | 🟢 **COMPLETED & TESTED (100%)** | **Completed Deliverables:**<br>• `nlp_advanced/__init__.py`<br>• `nlp_advanced/thesaurus.json` (Colloquial to clinical synonym dictionary)<br>• `nlp_advanced/query_expansion.py` (`QueryExpander` class mapping layperson terms into parenthesized Boolean OR clauses)<br>• `demo_ronald.py` (CLI query expansion integration test with Sharon's IR engine) |
 | **Sam** | Full-Stack Lead & Feedback Systems | **Phase 4 & 5**: Feedback Loop (Rocchio), Django Backend, React Frontend | 🔴 **MISSING / PENDING** | 1. Implement Rocchio feedback algorithm (`backend/search_api/rocchio.py`) using upvotes/downvotes to adjust query vectors.<br>2. Set up Django REST Framework backend on `localhost:8000` with singleton engine loading in `apps.py`.<br>3. Build local JWT authentication with SQLite/PostgreSQL.<br>4. Build React frontend on `localhost:3000` following `DESIGN.md` (Midnight Obsidian high-contrast theme, dosage badges, side-effect warning pills, and score drawer). |
 
 ---
@@ -67,7 +71,7 @@ The 13 columns present in `cleaned_medicines (4).csv`:
 | `RULES.md` | Team / Sharon | Updated (v2.0) | Coding standards, architectural boundaries, and negative constraints. |
 | `PHASES.md` | Team / Sharon | Updated (v2.0) | 5-phase roadmap, milestones, and deliverables. |
 | `DESIGN.md` | Sam / Sharon | Updated (v2.0) | UI/UX design tokens, Midnight Obsidian theme, and components. |
-| `MEMORY.md` | Sharon | Updated (v2.0) | Living project memory and teammate status tracking. |
+| `MEMORY.md` | Sharon / Ronald | Updated (v2.0) | Living project memory and teammate status tracking. |
 | `ir_engine/__init__.py` | Sharon | Complete ✅ | Package exports exposing `MedicineSearchEngine`. |
 | `ir_engine/preprocessor.py` | Sharon | Complete ✅ | Query tokenizer and Porter stemmer with token normalization. |
 | `ir_engine/inverted_index.py` | Sharon | Complete ✅ | Term-to-doc_id posting list dictionary & categorical indexing. |
@@ -77,6 +81,10 @@ The 13 columns present in `cleaned_medicines (4).csv`:
 | `ir_engine/search_engine.py` | Sharon | Complete ✅ | Unified public search engine facade and viva explanation generator. |
 | `test_ir_engine.py` | Sharon | Complete ✅ | Comprehensive test suite containing 36 unit tests. |
 | `requirements.txt` | Sharon | Complete ✅ | Environment dependencies (`scikit-learn`, `scipy`, `numpy`, `nltk`). |
+| `nlp_advanced/__init__.py` | Ronald | Complete ✅ | Package initialization for Phase 3 Advanced NLP module. |
+| `nlp_advanced/thesaurus.json` | Ronald | Complete ✅ | Medical synonym dictionary mapping layperson terms to pre-stemmed clinical synonyms. |
+| `nlp_advanced/query_expansion.py` | Ronald | Complete ✅ | Query expansion class expanding raw queries into parenthesized Boolean OR clauses. |
+| `demo_ronald.py` | Ronald | Complete ✅ | Interactive CLI demo verifying end-to-end integration between query expansion and Sharon's core search engine. |
 
 ---
 
@@ -120,7 +128,7 @@ The 13 columns present in `cleaned_medicines (4).csv`:
 ## 6. Next Immediate Steps (Teammate Action Items)
 
 1. **For Nysa (Phase 1):** Provide `nlp_advanced/pattern_matcher.py` for dosage regex extraction and fuzzy drug name spell-checking.
-2. **For Ronald (Phase 3):** Provide `nlp_advanced/thesaurus.json` and `nlp_advanced/query_expansion.py` to enrich user queries before passing them to Sharon's `engine.search()`.
+2. **For Ronald (Phase 3):** 🟢 **PHASE 3 COMPLETE** — Handed off to Sharon's engine and integrated via `demo_ronald.py`.
 3. **For Sam (Phase 4 & 5):** 
    - Initialize the Django backend (`backend/manage.py`) and import Sharon's `MedicineSearchEngine` in `search_api/apps.py`.
    - Implement `backend/search_api/rocchio.py` for upvote/downvote query vector adjustment.
