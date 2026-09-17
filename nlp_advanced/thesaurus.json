@@ -1,0 +1,9 @@
+{
+  "fever": ["fever", "pyrexia", "temperatur", "febrile"],
+  "headache": ["headach", "migrain", "cephalalgia"],
+  "loose motion": ["diarrhea", "diarrhoea", "gastroenteriti", "stomach upset"],
+  "vomiting": ["vomit", "nausea", "emesi"],
+  "stomach pain": ["abdominal pain", "gastriti", "cramp", "stomach pain"],
+  "cold": ["runni nose", "sneez", "allerg", "cough"],
+  "acidity": ["acid reflux", "gastroesophag", "heartburn", "indigest"]
+}
