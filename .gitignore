@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Large datasets (exceeds GitHub 100MB limit)
+cleaned_medicines (4).csv
+*.csv
+
+# Local secrets and caches
+.env
+*.log
